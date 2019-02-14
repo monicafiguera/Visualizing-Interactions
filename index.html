@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Intersection Tooltip venn.js</title>
+<style>
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+    <div> Select relations: </div>
+    <div>
+      
+        <input type="radio" name="dataset" value="crd"
+        onchange={setDataset("crd")}
+        checked /> 
+        <label for="crd">
+          DDI + CRD + PubMedDDI 
+        </label>
+    </div>
+    <div>
+      <input type="radio" name="dataset" value="ncrd"
+        onchange={setDataset("ncrd")} /> 
+        <label for="ncrd">
+          DDI + NCRD + PubMedDDI 
+        </label>
+    </div>
+    <div id="venn"></div>
+</body>
+
+<style>
+.venntooltip {
+  position: absolute;
+  text-align: center;
+  width: 128px;
+  height: 16px;
+  background: #333;
+  color: #ddd;
+  padding: 2px;
+  border: 0px;
+  border-radius: 8px;
+  opacity: 0;
+}
+</style>
+
+<script src="js/d3.v4.min.js"></script>
+<script src="js/venn.js"></script>
+<script src="js/data.jsonp"></script>
+<script src="js/data2.jsonp"></script>
+
+<script>
+  var sets = {}
+  var activeSet = data;
+
+  var realData = [
+           {"sets": ["DDI"], "size": 237847},
+           {"sets": ["CRD"], "size": 235559},
+           {"sets": ["PubMedDDI"], "size": 203},
+           {"sets": ["DDI", "CRD"], "size": 109502},
+           {"sets": ["DDI", "PubMedDDI"], "size": 22},
+           {"sets": ["CRD", "PubMedDDI"], "size": 23},
+           {"sets": ["DDI", "CRD", "PubMedDDI"], "size": 32}];
+
+  var realData2 = [
+           {"sets": ["DDI"], "size": 346725},
+           {"sets": ["NCRD"], "size": 4884},
+           {"sets": ["PubMedDDI"], "size": 222},
+           {"sets": ["DDI", "NCRD"], "size": 624},
+           {"sets": ["DDI", "PubMedDDI"], "size": 53},
+           {"sets": ["NCRD", "PubMedDDI"], "size": 4},
+           {"sets": ["DDI", "NCRD", "PubMedDDI"], "size": 1}];
+
+  window.onload = function() {
+    sets = data;
+    activeSet = "crd";
+    buildDiagram();
+  };
+
+  function setDataset(option){
+    if (option == "crd") {
+      sets = data;
+      activeSet = "crd";
+      buildDiagram();
+    } else {
+      sets = data2;
+      activeSet = "ncrd";
+      buildDiagram();
+    }
+  }
+
+  function checkArraysEquality(arr1, arr2) {
+    var a1l = arr1.length;
+    var a2l = arr2.length;
+    var n = a1l > a2l ? a1l : a2l;
+    var equal = true;
+
+    for (var i=0; i<n; i++) {
+      if (arr1[i] != arr2[i]) {
+        equal = false;       
+      } 
+    }
+
+    return equal;
+  }
+
+  function buildDiagram() {
+    var chart = venn.VennDiagram()
+                     .width(600)
+                     .height(600);
+    var div = d3.select("#venn")
+    div.datum(sets).call(chart);
+    var tooltip = d3.select("body").append("div")
+        .attr("class", "venntooltip");
+    div.selectAll("path")
+        .style("stroke-opacity", 0)
+        .style("stroke", "#fff")
+        .style("stroke-width", 3)
+    div.selectAll("g")
+        .on("mouseover", function(d, i) {
+            var realSize = 0;
+            
+            if (activeSet == "crd") {
+              for (var i=0; i < realData.length; i++) {
+                var areEqual = checkArraysEquality(realData[i].sets, d.sets);
+                if (areEqual) {
+                  realSize = realData[i].size;
+                }
+              }
+            } else {
+              for (var i=0; i < realData2.length; i++) {
+                var areEqual = checkArraysEquality(realData2[i].sets, d.sets);
+                if (areEqual) {
+                  realSize = realData2[i].size;
+                }
+              }
+            }
+
+            // sort all the areas relative to the current item
+            venn.sortAreas(div, d);
+            // Display a tooltip with the current size
+            tooltip.transition().duration(400).style("opacity", .9);
+            tooltip.text(realSize + " interactions");
+            // highlight the current path
+            var selection = d3.select(this).transition("tooltip").duration(400);
+            selection.select("path")
+                .style("fill-opacity", d.sets.length == 1 ? .4 : .1)
+                .style("stroke-opacity", 1);
+        })
+        .on("mousemove", function() {
+            tooltip.style("left", (d3.event.pageX) + "px")
+                   .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function(d, i) {
+            tooltip.transition().duration(400).style("opacity", 0);
+            var selection = d3.select(this).transition("tooltip").duration(400);
+            selection.select("path")
+                .style("fill-opacity", d.sets.length == 1 ? .25 : .0)
+                .style("stroke-opacity", 0);
+        });
+  }
+</script>
+</html>

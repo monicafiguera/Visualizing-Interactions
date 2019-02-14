@@ -1,0 +1,8 @@
+var data = [
+         {"sets": ["DDI"], "label": "DDI drugDrugInteraction (DrugBank)", "size": 100},
+         {"sets": ["CRD"], "label": "CRD drugDrugInteraction (metabolized by CYP enzyme)", "size": 100},
+         {"sets": ["PubMedDDI"], "label": "PubMedDDI drugDrugInteraction", "size": 40},
+         {"sets": ["DDI", "CRD"], "label": "109502", "size": 30},
+         {"sets": ["DDI", "PubMedDDI"], "label": "22", "size": 10},
+         {"sets": ["CRD", "PubMedDDI"], "label": "23", "size": 10},
+         {"sets": ["DDI", "CRD", "PubMedDDI"], "label": "32", "size": 15}];
