@@ -1,51 +1,65 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Intersection Tooltip venn.js</title>
-<style>
-body {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-}
-</style>
+  <meta charset="utf-8">
+  <title>Drug Interactions</title>
+  <style>
+    body {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #venn {
+        text-align: center;
+        padding-left: 40px;
+        padding-right: 40px;
+        margin-left: 160px;
+        margin-top: 20px;
+        border-radius: 6px;
+        box-shadow: rgba(0,0,0,0.6) 0 0 10px;
+    }
+
+    .venntooltip {
+        position: absolute;
+        text-align: center;
+        width: 128px;
+        height: 16px;
+        background: #333;
+        color: #ddd;
+        padding: 2px;
+        border: 0px;
+        border-radius: 8px;
+        opacity: 0;
+    }
+  </style>
 </head>
 
 <body>
-    <div> Select relations: </div>
-    <div>
-      
-        <input type="radio" name="dataset" value="crd"
-        onchange={setDataset("crd")}
-        checked /> 
-        <label for="crd">
-          DDI + CRD + PubMedDDI 
-        </label>
-    </div>
-    <div>
-      <input type="radio" name="dataset" value="ncrd"
-        onchange={setDataset("ncrd")} /> 
-        <label for="ncrd">
-          DDI + NCRD + PubMedDDI 
-        </label>
+    <div class="text-container">
+        <h2>Analysis Drug-Drug Interactions</h2>
+        <div style="line-height: 28px"> Select relations: </div>
+        
+        <div style="line-height: 24px">
+            <input type="radio" name="dataset" value="crd"
+                   onchange={setDataset("crd")}
+                   checked /> 
+            <label for="crd">
+                DDI + CRD + PubMedDDI 
+            </label>
+        </div>
+        
+        <div style="line-height: 24px">
+            <input type="radio" name="dataset" value="ncrd"
+                   onchange={setDataset("ncrd")} /> 
+            <label for="ncrd">
+                DDI + NCRD + PubMedDDI 
+            </label>
+        </div>
     </div>
     <div id="venn"></div>
 </body>
-
-<style>
-.venntooltip {
-  position: absolute;
-  text-align: center;
-  width: 128px;
-  height: 16px;
-  background: #333;
-  color: #ddd;
-  padding: 2px;
-  border: 0px;
-  border-radius: 8px;
-  opacity: 0;
-}
-</style>
 
 <script src="js/d3.v4.min.js"></script>
 <script src="js/venn.js"></script>
@@ -54,25 +68,25 @@ body {
 
 <script>
   var sets = {}
-  var activeSet = data;
+  var activeSet = "crd";
 
   var realData = [
            {"sets": ["DDI"], "size": 237847},
            {"sets": ["CRD"], "size": 235559},
-           {"sets": ["PubMedDDI"], "size": 203},
+           {"sets": ["PubMedDI"], "size": 203},
            {"sets": ["DDI", "CRD"], "size": 109502},
-           {"sets": ["DDI", "PubMedDDI"], "size": 22},
-           {"sets": ["CRD", "PubMedDDI"], "size": 23},
-           {"sets": ["DDI", "CRD", "PubMedDDI"], "size": 32}];
+           {"sets": ["DDI", "PubMedDI"], "size": 22},
+           {"sets": ["CRD", "PubMedDI"], "size": 23},
+           {"sets": ["DDI", "CRD", "PubMedDI"], "size": 32}];
 
   var realData2 = [
            {"sets": ["DDI"], "size": 346725},
            {"sets": ["NCRD"], "size": 4884},
-           {"sets": ["PubMedDDI"], "size": 222},
+           {"sets": ["PubMedDI"], "size": 222},
            {"sets": ["DDI", "NCRD"], "size": 624},
-           {"sets": ["DDI", "PubMedDDI"], "size": 53},
-           {"sets": ["NCRD", "PubMedDDI"], "size": 4},
-           {"sets": ["DDI", "NCRD", "PubMedDDI"], "size": 1}];
+           {"sets": ["DDI", "PubMedDI"], "size": 53},
+           {"sets": ["NCRD", "PubMedDI"], "size": 4},
+           {"sets": ["DDI", "NCRD", "PubMedDI"], "size": 1}];
 
   window.onload = function() {
     sets = data;
@@ -81,6 +95,7 @@ body {
   };
 
   function setDataset(option){
+    sets = {};
     if (option == "crd") {
       sets = data;
       activeSet = "crd";
@@ -111,8 +126,36 @@ body {
     var chart = venn.VennDiagram()
                      .width(600)
                      .height(600);
-    var div = d3.select("#venn")
+
+    var div = d3.select("#venn");
+
     div.datum(sets).call(chart);
+
+    // Changing style
+    d3.select("#venn").datum(sets).call(chart);
+            var colours = ['green', 'orchid', 'red', 'yellow'];
+            d3.selectAll("#venn .venn-circle path")
+                .style("stroke-width", 10)
+                .style("fill", function(d,i) { 
+                    var s = d.sets[0];
+                  
+                    if (s == "DDI") {
+                        return 'green';
+                    } else if (s == "PubMedDI") {
+                        return 'yellow';
+                    } else if (s == "CRD") {
+                        return 'orchid';
+                    } else if (s == "NCRD") {
+                        return 'red';
+                    }
+                });
+    
+    d3.selectAll("#venn .venn-circle text")
+                .style("fill", function(d,i) { return 'black'})
+                .style("font-size", "16px")
+                .style("font-weight", "300");
+
+    // Adding tooltips on hover
     var tooltip = d3.select("body").append("div")
         .attr("class", "venntooltip");
     div.selectAll("path")
@@ -120,6 +163,11 @@ body {
         .style("stroke", "#fff")
         .style("stroke-width", 3)
     div.selectAll("g")
+        .attr("id", function(d, i) {
+          var elem = d3.select(this);
+          var containingSets = elem["_groups"][0][0].getAttribute("data-venn-sets");
+          return containingSets;
+         })
         .on("mouseover", function(d, i) {
             var realSize = 0;
             
@@ -139,15 +187,55 @@ body {
               }
             }
 
+            var elem = d3.select(this);
+            var containingSets = elem["_groups"][0][0].getAttribute("data-venn-sets");
+
+            //DDI_CRD_PubMedDDI
+
+            if (containingSets.match("DDI")) {
+              var e1 = document.getElementById("DDI");
+              var selection = d3.select(e1).transition("tooltip").duration(400);
+              selection.select("path")
+                .style("fill-opacity", .7)
+                .style("stroke-opacity", 1);
+            }
+
+            if (containingSets.match("CRD")) {
+              var e2 = document.getElementById("CRD");
+              var selection = d3.select(e2).transition("tooltip").duration(400);
+              selection.select("path")
+                .style("fill-opacity", .7)
+                .style("stroke-opacity", 1);
+            }
+
+            if (containingSets.match("PubMedDI")) {
+              var e3 = document.getElementById("PubMedDI");
+              var selection = d3.select(e3).transition("tooltip").duration(400);
+              selection.select("path")
+                .style("fill-opacity", .7)
+                .style("stroke-opacity", 1);           
+            }
+            
+            if (containingSets.match("NCRD")) {
+              var e4 = document.getElementById("NCRD");
+              var selection = d3.select(e4).transition("tooltip").duration(400);
+              selection.select("path")
+                .style("fill-opacity", .7)
+                .style("stroke-opacity", 1);
+            }
+
             // sort all the areas relative to the current item
             venn.sortAreas(div, d);
             // Display a tooltip with the current size
-            tooltip.transition().duration(400).style("opacity", .9);
-            tooltip.text(realSize + " interactions");
+            tooltip.transition().duration(400).style("opacity", 1);
+            var inter = realSize == 1 ? "1 interaction" : realSize + " interactions";
+
+            tooltip.text(inter);
             // highlight the current path
             var selection = d3.select(this).transition("tooltip").duration(400);
+            
             selection.select("path")
-                .style("fill-opacity", d.sets.length == 1 ? .4 : .1)
+                .style("fill-opacity", .7)
                 .style("stroke-opacity", 1);
         })
         .on("mousemove", function() {
@@ -159,6 +247,30 @@ body {
             var selection = d3.select(this).transition("tooltip").duration(400);
             selection.select("path")
                 .style("fill-opacity", d.sets.length == 1 ? .25 : .0)
+                .style("stroke-opacity", 0);
+
+            var e1 = document.getElementById("DDI");
+              var selection = d3.select(e1).transition("tooltip").duration(400);
+              selection.select("path")
+                .style("fill-opacity", d.sets.length == 1 ? .25 : .2)
+                .style("stroke-opacity", 0);
+
+            var e2 = document.getElementById("CRD");
+              var selection = d3.select(e2).transition("tooltip").duration(400);
+              selection.select("path")
+                .style("fill-opacity", d.sets.length == 1 ? .25 : .2)
+                .style("stroke-opacity", 0);
+
+            var e3 = document.getElementById("PubMedDI");
+              var selection = d3.select(e3).transition("tooltip").duration(400);
+              selection.select("path")
+                .style("fill-opacity", d.sets.length == 1 ? .25 : .2)
+                .style("stroke-opacity", 1);
+
+            var e4 = document.getElementById("NCRD");
+              var selection = d3.select(e4).transition("tooltip").duration(400);
+              selection.select("path")
+                .style("fill-opacity", d.sets.length == 1 ? .25 : .2)
                 .style("stroke-opacity", 0);
         });
   }
