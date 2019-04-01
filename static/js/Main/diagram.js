@@ -1,128 +1,49 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Drug Interactions</title>
-  <style>
-    body {
-        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-        font-size: 14px;
-        display: flex;
-        justify-content: center;
-    }
+var realData = [
+       {"sets": ["DDI"], "size": 347403},
+       {"sets": ["CRD"], "size": 345116},
+       {"sets": ["PubMedDI"], "size": 280},
+       {"sets": ["DDI", "CRD"], "size": 109534},
+       {"sets": ["DDI", "PubMedDI"], "size": 54},
+       {"sets": ["CRD", "PubMedDI"], "size": 55},
+       {"sets": ["DDI", "CRD", "PubMedDI"], "size": 32}];
 
-    #venn {
-        text-align: center;
-        padding-left: 40px;
-        padding-right: 40px;
-        margin-left: 160px;
-        margin-top: 20px;
-        border-radius: 6px;
-        box-shadow: rgba(0,0,0,0.6) 0 0 10px;
-    }
+var realData2 = [
+       {"sets": ["DDI"], "size": 347403},
+       {"sets": ["NCRD"], "size": 5513},
+       {"sets": ["PubMedDI"], "size": 280},
+       {"sets": ["DDI", "NCRD"], "size": 625},
+       {"sets": ["DDI", "PubMedDI"], "size": 54},
+       {"sets": ["NCRD", "PubMedDI"], "size": 5},
+       {"sets": ["DDI", "NCRD", "PubMedDI"], "size": 1}];
 
-    .venntooltip {
-        position: absolute;
-        text-align: center;
-        width: 128px;
-        height: 16px;
-        background: #333;
-        color: #ddd;
-        padding: 2px;
-        border: 0px;
-        border-radius: 8px;
-        opacity: 0;
-    }
-  </style>
-</head>
 
-<body>
-    <div class="text-container">
-        <h2>Analysis Drug-Drug Interactions</h2>
-        <div style="line-height: 28px"> Select relations: </div>
-        
-        <div style="line-height: 24px">
-            <input type="radio" name="dataset" value="crd"
-                   onchange={setDataset("crd")}
-                   checked /> 
-            <label for="crd">
-                DDI + CRD + PubMedDDI 
-            </label>
-        </div>
-        
-        <div style="line-height: 24px">
-            <input type="radio" name="dataset" value="ncrd"
-                   onchange={setDataset("ncrd")} /> 
-            <label for="ncrd">
-                DDI + NCRD + PubMedDDI 
-            </label>
-        </div>
-    </div>
-    <div id="venn"></div>
-</body>
-
-<script src="js/d3.v4.min.js"></script>
-<script src="js/venn.js"></script>
-<script src="js/data.jsonp"></script>
-<script src="js/data2.jsonp"></script>
-
-<script>
-  var sets = {}
-  var activeSet = "crd";
-
-  var realData = [
-           {"sets": ["DDI"], "size": 347403},
-           {"sets": ["CRD"], "size": 345116},
-           {"sets": ["PubMedDI"], "size": 280},
-           {"sets": ["DDI", "CRD"], "size": 109534},
-           {"sets": ["DDI", "PubMedDI"], "size": 54},
-           {"sets": ["CRD", "PubMedDI"], "size": 55},
-           {"sets": ["DDI", "CRD", "PubMedDI"], "size": 32}];
-
-  var realData2 = [
-           {"sets": ["DDI"], "size": 347403},
-           {"sets": ["NCRD"], "size": 5513},
-           {"sets": ["PubMedDI"], "size": 280},
-           {"sets": ["DDI", "NCRD"], "size": 625},
-           {"sets": ["DDI", "PubMedDI"], "size": 54},
-           {"sets": ["NCRD", "PubMedDI"], "size": 5},
-           {"sets": ["DDI", "NCRD", "PubMedDI"], "size": 1}];
-
-  window.onload = function() {
-    sets = data;
-    activeSet = "crd";
-    buildDiagram();
-  };
-
-  function setDataset(option){
-    sets = {};
-    if (option == "crd") {
-      sets = data;
-      activeSet = "crd";
-      buildDiagram();
-    } else {
-      sets = data2;
-      activeSet = "ncrd";
-      buildDiagram();
-    }
-  }
-
-  function checkArraysEquality(arr1, arr2) {
+function checkArraysEquality(arr1, arr2) {
     var a1l = arr1.length;
     var a2l = arr2.length;
     var n = a1l > a2l ? a1l : a2l;
     var equal = true;
 
     for (var i=0; i<n; i++) {
-      if (arr1[i] != arr2[i]) {
-        equal = false;       
-      } 
+        if (arr1[i] != arr2[i]) {
+            equal = false;
+        }
     }
 
     return equal;
-  }
+}
 
-  function buildDiagram() {
+function buildDiagram(option) {
+    var sets = {};
+    var activeSet;
+
+    if (option === "crd") {
+        sets = data;
+        activeSet = "crd";
+    } else {
+        sets = data2;
+        activeSet = "ncrd";
+    }
+
     var chart = venn.VennDiagram()
                      .width(600)
                      .height(600);
@@ -136,9 +57,9 @@
             var colours = ['green', 'orchid', 'red', 'yellow'];
             d3.selectAll("#venn .venn-circle path")
                 .style("stroke-width", 10)
-                .style("fill", function(d,i) { 
+                .style("fill", function(d,i) {
                     var s = d.sets[0];
-                  
+
                     if (s == "DDI") {
                         return 'green';
                     } else if (s == "PubMedDI") {
@@ -149,7 +70,7 @@
                         return 'red';
                     }
                 });
-    
+
     d3.selectAll("#venn .venn-circle text")
                 .style("fill", function(d,i) { return 'black'})
                 .style("font-size", "14px")
@@ -170,7 +91,7 @@
          })
         .on("mouseover", function(d, i) {
             var realSize = 0;
-            
+
             if (activeSet == "crd") {
               for (var i=0; i < realData.length; i++) {
                 var areEqual = checkArraysEquality(realData[i].sets, d.sets);
@@ -213,9 +134,9 @@
               var selection = d3.select(e3).transition("tooltip").duration(400);
               selection.select("path")
                 .style("fill-opacity", .7)
-                .style("stroke-opacity", 1);           
+                .style("stroke-opacity", 1);
             }
-            
+
             if (containingSets.match("NCRD")) {
               var e4 = document.getElementById("NCRD");
               var selection = d3.select(e4).transition("tooltip").duration(400);
@@ -233,7 +154,7 @@
             tooltip.text(inter);
             // highlight the current path
             var selection = d3.select(this).transition("tooltip").duration(400);
-            
+
             selection.select("path")
                 .style("fill-opacity", .7)
                 .style("stroke-opacity", 1);
@@ -273,6 +194,8 @@
                 .style("fill-opacity", d.sets.length == 1 ? .25 : .2)
                 .style("stroke-opacity", 0);
         });
+}
+
+  export default {
+      buildDiagram: buildDiagram
   }
-</script>
-</html>
