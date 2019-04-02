@@ -8,7 +8,6 @@ import wcrd from '../queries/wcrd';
 import wncrd from '../queries/wncrd';
 
 import DatasetListContainer from "./DatasetListContainer";
-import Endpoint from "../Endpoint";
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -61,6 +60,10 @@ export default class Main extends React.Component {
             diagram.buildDiagram(currentDataset);
             diagram.repaint(this.props.data);
         }
+    }
+
+    componentWillUnmount() {
+        this.props.generalActions.setCurrentDataset('');
     }
 
     render() {

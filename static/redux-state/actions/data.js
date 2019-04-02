@@ -8,8 +8,8 @@ export function addDataElem(sets, size) {
     return { type: ADD_DATA_ELEM, sets, size };
 }
 
-export function resetData(sets, size) {
-    return { type: RESET_DATA, sets, size };
+export function resetData() {
+    return { type: RESET_DATA };
 }
 /***********/
 
