@@ -4,7 +4,7 @@ const config = {
     entry:  __dirname + '/js/index.jsx',
     mode: "development",
     output: {
-        path: __dirname + '/dist',
+        path: __dirname + '/js/libs',
         filename: 'bundle.js',
     },
     resolve: {
