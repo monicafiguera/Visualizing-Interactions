@@ -103,10 +103,10 @@ export default class Query extends Component {
 							</CardHeader>
 							<CardBody className="panel-body">
 								<ul>
-									<li id="sampleCRD">
+									<li id="sampleCRD" onClick={load.setSampleQueryValue.bind(this, crdQuery)}>
 										Get CRD
 									</li>
-									<li id="sampleInteractions">
+									<li id="sampleInteractions" onClick={load.setSampleQueryValue.bind(this, intersCRDPUB)}>
 										Get interactions between CRD and PubMedDDI
 									</li>
 								</ul>

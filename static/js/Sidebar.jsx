@@ -1,20 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { compose, withState, withHandlers } from "recompose";
 import {
     Collapse,
-    Input,
-    InputGroup,
     Navbar,
     Nav,
     NavItem } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faDatabase,
-    faEnvelope,
     faSearch,
-    faSitemap,
-    faTable } from "@fortawesome/free-solid-svg-icons";
+    faSitemap } from "@fortawesome/free-solid-svg-icons";
 
 const data = [
     { id: 0, name: "Interactions",     icon: faSitemap, link: "/" },
@@ -26,10 +20,6 @@ const Sidebar = ({activeSidebarTab}) => {
         <div id="sidebar-nav">
             <Navbar color="light" light>
                 <Collapse isOpen={true} navbar>
-
-                    <InputGroup className="search-bar">
-                        <Input placeholder="Search..." />
-                    </InputGroup>
 
                     <Nav className="ml-auto" navbar>
 

@@ -1,4 +1,5 @@
 import fetch from "cross-fetch";
+import Global from '../singleton.js';
 
 export const ADD_DATA_ELEM = 'ADD_DATA_ELEM';
 export const RESET_DATA = 'RESET_DATA';
@@ -15,7 +16,7 @@ export function resetData(sets, size) {
 export function fetchCount(query) {
     //console.log("query:", query);
     return (dispatch) => {
-        fetch("http://localhost:11686/sparql?query=" + encodeURIComponent(query), {
+        fetch(Global.endpoint + "?query=" + encodeURIComponent(query), {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

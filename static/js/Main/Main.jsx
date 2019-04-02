@@ -1,13 +1,9 @@
 import React from "react";
 import {
-    Row,
     Col,
-    CardHeader,
-    CardBody,
-    Card,
-    CardFooter
-} from 'reactstrap';
-import DatasetListContainer from './DatasetListContainer';
+    Row } from "reactstrap";
+
+import DatasetListContainer from "./DatasetListContainer";
 
 import diagram from "./diagram";
 import wcrd from '../queries/wcrd';
