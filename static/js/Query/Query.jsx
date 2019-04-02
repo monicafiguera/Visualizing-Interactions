@@ -10,7 +10,7 @@ import {
 
 import DatasetListContainer from "../Main/DatasetListContainer";
 
-import queryUtils from "./queryUtils";
+//import queryUtils from "./queryUtils";
 import load from './load';
 
 var sampleQuery = "SELECT  distinct COUNT(?d1)" +
@@ -31,7 +31,7 @@ export default class Query extends Component {
 
 		this.loadQueryBox();
 
-		//load.load();
+		load.load();
 
 		/*const yasqe = YASQE(document.getElementById("yasqe"), {
         	viewportMargin: Infinity,
@@ -56,8 +56,8 @@ export default class Query extends Component {
 	}
 
 	loadQueryBox() {
-		console.log("loading query box...");
-		queryUtils.initializeYASQE();
+		console.log("loading box...");
+		//queryUtils.initializeYASQE();
 		this.setState({firstTimeLoaded: true});
 	}
 
@@ -81,7 +81,7 @@ export default class Query extends Component {
 
 					<Col lg="8">
 						<div id="yasqe"></div>
-
+						<div id="yasr"></div>
 						<div className="form-group">
 							<label className="control-label " htmlFor="timeout">Timeout</label>
 							<input className="form-control" id="timeout" name="timeout" type="text"/>

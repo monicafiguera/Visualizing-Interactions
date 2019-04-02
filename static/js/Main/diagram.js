@@ -33,6 +33,7 @@ function checkArraysEquality(arr1, arr2) {
 }
 
 function buildDiagram(option) {
+    console.log("build", option);
     var sets = {};
     var activeSet;
 
@@ -49,7 +50,6 @@ function buildDiagram(option) {
                      .height(600);
 
     var div = d3.select("#venn");
-
     div.datum(sets).call(chart);
 
     // Changing style
@@ -58,17 +58,8 @@ function buildDiagram(option) {
             d3.selectAll("#venn .venn-circle path")
                 .style("stroke-width", 10)
                 .style("fill", function(d,i) {
-                    var s = d.sets[0];
-
-                    if (s == "DDI") {
-                        return 'green';
-                    } else if (s == "PubMedDI") {
-                        return 'yellow';
-                    } else if (s == "CRD") {
-                        return 'orchid';
-                    } else if (s == "NCRD") {
-                        return 'red';
-                    }
+                    //var s = d.sets[0];
+                    return colours[i];
                 });
 
     d3.selectAll("#venn .venn-circle text")
@@ -79,20 +70,17 @@ function buildDiagram(option) {
     // Adding tooltips on hover
     var tooltip = d3.select("body").append("div")
         .attr("class", "venntooltip");
+
+    // add listeners to all the groups to display tooltip on mouseover
     div.selectAll("path")
         .style("stroke-opacity", 0)
         .style("stroke", "#fff")
-        .style("stroke-width", 3)
+        .style("stroke-width", 3);
     div.selectAll("g")
-        .attr("id", function(d, i) {
-          var elem = d3.select(this);
-          var containingSets = elem["_groups"][0][0].getAttribute("data-venn-sets");
-          return containingSets;
-         })
         .on("mouseover", function(d, i) {
             var realSize = 0;
 
-            if (activeSet == "crd") {
+            if (activeSet === "crd") {
               for (var i=0; i < realData.length; i++) {
                 var areEqual = checkArraysEquality(realData[i].sets, d.sets);
                 if (areEqual) {
@@ -108,53 +96,17 @@ function buildDiagram(option) {
               }
             }
 
-            var elem = d3.select(this);
-            var containingSets = elem["_groups"][0][0].getAttribute("data-venn-sets");
-
-            //DDI_CRD_PubMedDDI
-
-            if (containingSets.match("DDI")) {
-              var e1 = document.getElementById("DDI");
-              var selection = d3.select(e1).transition("tooltip").duration(400);
-              selection.select("path")
-                .style("fill-opacity", .7)
-                .style("stroke-opacity", 1);
-            }
-
-            if (containingSets.match("CRD")) {
-              var e2 = document.getElementById("CRD");
-              var selection = d3.select(e2).transition("tooltip").duration(400);
-              selection.select("path")
-                .style("fill-opacity", .7)
-                .style("stroke-opacity", 1);
-            }
-
-            if (containingSets.match("PubMedDI")) {
-              var e3 = document.getElementById("PubMedDI");
-              var selection = d3.select(e3).transition("tooltip").duration(400);
-              selection.select("path")
-                .style("fill-opacity", .7)
-                .style("stroke-opacity", 1);
-            }
-
-            if (containingSets.match("NCRD")) {
-              var e4 = document.getElementById("NCRD");
-              var selection = d3.select(e4).transition("tooltip").duration(400);
-              selection.select("path")
-                .style("fill-opacity", .7)
-                .style("stroke-opacity", 1);
-            }
+            var inter = realSize === 1 ? "1 interaction" : realSize + " interactions";
 
             // sort all the areas relative to the current item
             venn.sortAreas(div, d);
+
             // Display a tooltip with the current size
             tooltip.transition().duration(400).style("opacity", 1);
-            var inter = realSize == 1 ? "1 interaction" : realSize + " interactions";
-
             tooltip.text(inter);
+
             // highlight the current path
             var selection = d3.select(this).transition("tooltip").duration(400);
-
             selection.select("path")
                 .style("fill-opacity", .7)
                 .style("stroke-opacity", 1);
@@ -167,31 +119,7 @@ function buildDiagram(option) {
             tooltip.transition().duration(400).style("opacity", 0);
             var selection = d3.select(this).transition("tooltip").duration(400);
             selection.select("path")
-                .style("fill-opacity", d.sets.length == 1 ? .25 : .0)
-                .style("stroke-opacity", 0);
-
-            var e1 = document.getElementById("DDI");
-              var selection = d3.select(e1).transition("tooltip").duration(400);
-              selection.select("path")
-                .style("fill-opacity", d.sets.length == 1 ? .25 : .2)
-                .style("stroke-opacity", 0);
-
-            var e2 = document.getElementById("CRD");
-              var selection = d3.select(e2).transition("tooltip").duration(400);
-              selection.select("path")
-                .style("fill-opacity", d.sets.length == 1 ? .25 : .2)
-                .style("stroke-opacity", 0);
-
-            var e3 = document.getElementById("PubMedDI");
-              var selection = d3.select(e3).transition("tooltip").duration(400);
-              selection.select("path")
-                .style("fill-opacity", d.sets.length == 1 ? .25 : .2)
-                .style("stroke-opacity", 1);
-
-            var e4 = document.getElementById("NCRD");
-              var selection = d3.select(e4).transition("tooltip").duration(400);
-              selection.select("path")
-                .style("fill-opacity", d.sets.length == 1 ? .25 : .2)
+                .style("fill-opacity", d.sets.length === 1 ? .25 : .0)
                 .style("stroke-opacity", 0);
         });
 }

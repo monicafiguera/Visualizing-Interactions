@@ -44,19 +44,24 @@ YASQE.defaults.value = "SELECT DISTINCT ?concept\n WHERE {\n\t?s a ?concept\n} L
 YASQE.defaults.sparql.endpoint = "http://localhost:11686/sparql";
 yasqe.options.sparql.callbacks.beforeSend = function(jqXHR, setting){
         console.log('setting:',setting, yasqe.getValue());
+        var urlSent = endpoint + "/default-graph-uri=" + "&query=" + encodeURIComponent(yasqe.getValue());
+        console.log("sent url:", urlSent);
+
         $("#resstatus").hide();
         setting.contentType = "application/json";
         setting.headers = {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin' : '*'
+                'Access-Control-Allow-Origin' : '*',
+                'Access-Control-Allow-Headers': 'X-Requested-With'
             };
         setting.accessControlAllowOrigin = '*';
         setting.dataTypes = ["jsonp"];
-        //setting.url = endpoint + "/default-graph-uri=" + "&query=" + encodeURIComponent(yasqe.getValue());
-        //setting.url = "http://localhost:11686/sparql&query=" + encodeURIComponent(yasqe.getValue());
-        //setting.url = "http://localhost:11686/sparql&query=" + t;
-        setting.url = sampleURL;
+        //setting.url = endpoint + "?default-graph-uri=" + "&query=" + encodeURIComponent(yasqe.getValue());
+        setting.url = "http://localhost:11686/sparql?query=" + encodeURIComponent(yasqe.getValue()); // works
+        //setting.url = "http://localhost:11686/sparql?query=" + t; // works in postman
+        //setting.url = sampleURL;
+        //setting.url = urlSent;
         setting.crossDomain = true;
         setting.data ={"query": yasqe.getValue()};
         //$("#resultinfo").hide();
