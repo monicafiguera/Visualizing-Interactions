@@ -5,7 +5,7 @@ export default class DatasetList extends React.Component {
         super(props);
 
         this.state = {
-            currentSelectedDataset: this.props.currentDataset
+            currentSelectedDataset: ''
         };
 
         this.handleChange = this.handleChange.bind(this);

@@ -1,7 +1,6 @@
 var YASQE = require("../libs/yasqe.bundled.min");
 import Global from '../../redux-state/singleton.js';
 
-//var endpoint = "http://localhost:11686/sparql";
 var endpoint = Global.endpoint;
 var yasqe = null;
 
