@@ -5,6 +5,10 @@ class Global {
   constructor() {
     this.endpoint = "http://localhost:11686/sparql";
   }
+
+  setEndpoint(endpoint) {
+    this.endpoint = endpoint;
+  }
 }
 
 export default (new Global);

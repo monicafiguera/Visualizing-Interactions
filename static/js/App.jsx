@@ -5,11 +5,13 @@ import { Provider } from "react-redux";
 import MainContainer        from "./Main/MainContainer";
 import QueryContainer       from "./Query/QueryContainer";
 import SidebarContainer     from "./SidebarContainer";
+import HeaderMenu           from "./HeaderMenu";
 
 const App = ({store}) => (
     <Provider store={store}>
         <div className="App">
             <header className="App-header">
+                <HeaderMenu />
 
                 <Router>
                     <div id="main-container">

@@ -30,7 +30,7 @@ export default class DatasetList extends React.Component {
             <div className="form-group form-control-lg">
                 <select className="form-control " id="datasetlist"
                         value={currentSelectedDataset} onChange={this.handleChange}>
-                    <option value="">Choose dataset ...</option>
+                    <option value="">Choose data to interact...</option>
                     {Object.keys(datasets).map((uri, index) => {
                         return <option key={index} value={uri}>{datasets[uri].name}</option>
                     })}

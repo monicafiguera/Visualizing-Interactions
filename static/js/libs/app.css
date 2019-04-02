@@ -38,7 +38,7 @@ p {
 }
 
 div#header-navbar * {
-  color: #e7e7e7;
+  /*color: #e7e7e7;*/
 }
 
 div#header-navbar *:hover {
@@ -496,4 +496,61 @@ table#datasources tbody tr.active {
 .fed-actions-container div.fed-opt-disabled * {
   color: gray;
   cursor: default;
+}
+
+.button-save {
+    height: calc(2.25rem + 2px);
+    line-height: 1.5;
+
+    text-align: right;
+    width: 6px;
+}
+
+.button-save svg {
+  margin: 0;
+}
+
+.button-save svg path {
+  color: white;
+}
+
+.input-endpoint-name {
+    flex: 1 1 auto;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-right: 8px;
+}
+
+.label-endpoint {
+  color: black!important;
+  margin-right: 8px;
+  padding-top: 8px;
+  font-size: 15px;
+}
+
+#header-navbar-endpoint {
+  display: flex;
+  flex-direction: row;
+
+  width: 35%;
+  float: right;
+}
+
+#header-navbar {
+  padding: 3px;
+  padding-right: 10px;
+  border-bottom: 1px solid #b8b8b8;
+  background: #f8f6f6;
+}
+
+h3 {
+  font-size: 20px;
 }

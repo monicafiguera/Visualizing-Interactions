@@ -3,15 +3,17 @@ import {
     Col,
     Row } from "reactstrap";
 
-import DatasetListContainer from "./DatasetListContainer";
-
 import diagram from "./diagram";
 import wcrd from '../queries/wcrd';
 import wncrd from '../queries/wncrd';
 
+import DatasetListContainer from "./DatasetListContainer";
+import Endpoint from "../Endpoint";
+
 export default class Main extends React.Component {
     constructor(props) {
         super(props);
+
     }
 
     componentDidMount() {
