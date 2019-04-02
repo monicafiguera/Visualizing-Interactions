@@ -1,8 +1,8 @@
 var data2 = [
-         {"sets": ["DDI"], "label": "DDI drugDrugInteraction (DrugBank)   346,725", "size": 100},
-         {"sets": ["NCRD"], "label": "NCRD drugDrugInteraction (Not metabolized by any CYP enzyme)   4,884", "size": 100},
-         {"sets": ["PubMedDI"], "label": "PubMedDDI drugDrugInteraction   222", "size": 100},
-         {"sets": ["DDI", "NCRD"], "label": "624", "size": 25},
-         {"sets": ["DDI", "PubMedDI"], "label": "53", "size": 25},
-         {"sets": ["NCRD", "PubMedDI"], "label": "4", "size": 25},
-         {"sets": ["DDI", "NCRD", "PubMedDI"], "label": "1", "size": 15}];
+         {"sets": ["ddi"], "label": "DDI drugDrugInteraction (DrugBank)   346,725", "size": 100},
+         {"sets": ["ncrd"], "label": "NCRD drugDrugInteraction (Not metabolized by any CYP enzyme)   4,884", "size": 100},
+         {"sets": ["pubMed"], "label": "PubMedDDI drugDrugInteraction   222", "size": 100},
+         {"sets": ["ddi", "ncrd"], "label": "624", "size": 25},
+         {"sets": ["ddi", "pubMed"], "label": "53", "size": 25},
+         {"sets": ["ncrd", "pubMed"], "label": "4", "size": 25},
+         {"sets": ["ddi", "ncrd", "pubMed"], "label": "1", "size": 15}];

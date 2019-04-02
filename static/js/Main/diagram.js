@@ -1,12 +1,3 @@
-var realData = [
-       {"sets": ["DDI"], "size": 347403},
-       {"sets": ["CRD"], "size": 345116},
-       {"sets": ["PubMedDI"], "size": 280},
-       {"sets": ["DDI", "CRD"], "size": 109534},
-       {"sets": ["DDI", "PubMedDI"], "size": 54},
-       {"sets": ["CRD", "PubMedDI"], "size": 55},
-       {"sets": ["DDI", "CRD", "PubMedDI"], "size": 32}];
-
 var realData2 = [
        {"sets": ["DDI"], "size": 347403},
        {"sets": ["NCRD"], "size": 5513},
@@ -16,33 +7,13 @@ var realData2 = [
        {"sets": ["NCRD", "PubMedDI"], "size": 5},
        {"sets": ["DDI", "NCRD", "PubMedDI"], "size": 1}];
 
-
-function checkArraysEquality(arr1, arr2) {
-    var a1l = arr1.length;
-    var a2l = arr2.length;
-    var n = a1l > a2l ? a1l : a2l;
-    var equal = true;
-
-    for (var i=0; i<n; i++) {
-        if (arr1[i] != arr2[i]) {
-            equal = false;
-        }
-    }
-
-    return equal;
-}
-
 function buildDiagram(option) {
-    console.log("build", option);
     var sets = {};
-    var activeSet;
 
     if (option === "crd") {
         sets = data;
-        activeSet = "crd";
     } else {
         sets = data2;
-        activeSet = "ncrd";
     }
 
     var chart = venn.VennDiagram()
@@ -67,6 +38,27 @@ function buildDiagram(option) {
                 .style("font-size", "14px")
                 .style("font-weight", "300");
 
+}
+
+function checkArraysEquality(arr1, arr2) {
+    var a1l = arr1.length;
+    var a2l = arr2.length;
+    var n = a1l > a2l ? a1l : a2l;
+    var equal = true;
+
+    for (var i=0; i<n; i++) {
+        if (arr1[i] != arr2[i]) {
+            equal = false;
+        }
+    }
+
+    return equal;
+}
+
+function repaint(realData) {
+    console.log(realData);
+    var div = d3.select("#venn");
+
     // Adding tooltips on hover
     var tooltip = d3.select("body").append("div")
         .attr("class", "venntooltip");
@@ -80,20 +72,11 @@ function buildDiagram(option) {
         .on("mouseover", function(d, i) {
             var realSize = 0;
 
-            if (activeSet === "crd") {
-              for (var i=0; i < realData.length; i++) {
+            for (var i=0; i < realData.length; i++) {
                 var areEqual = checkArraysEquality(realData[i].sets, d.sets);
                 if (areEqual) {
                   realSize = realData[i].size;
                 }
-              }
-            } else {
-              for (var i=0; i < realData2.length; i++) {
-                var areEqual = checkArraysEquality(realData2[i].sets, d.sets);
-                if (areEqual) {
-                  realSize = realData2[i].size;
-                }
-              }
             }
 
             var inter = realSize === 1 ? "1 interaction" : realSize + " interactions";
@@ -124,6 +107,7 @@ function buildDiagram(option) {
         });
 }
 
-  export default {
-      buildDiagram: buildDiagram
-  }
+export default {
+    buildDiagram: buildDiagram,
+    repaint: repaint
+}

@@ -1,8 +1,8 @@
 var data = [
-         {"sets": ["DDI"], "label": "DDI drugDrugInteraction (DrugBank)   237,847", "size": 100},
-         {"sets": ["CRD"], "label": "CRD drugDrugInteraction (metabolized by CYP enzyme)   235,559", "size": 100},
-         {"sets": ["PubMedDI"], "label": "PubMedDDI drugDrugInteraction   203", "size": 100},
-         {"sets": ["DDI", "CRD"], "label": "109502", "size": 25},
-         {"sets": ["DDI", "PubMedDI"], "label": "22", "size": 25},
-         {"sets": ["CRD", "PubMedDI"], "label": "23", "size": 25},
-         {"sets": ["DDI", "CRD", "PubMedDI"], "label": "32", "size": 15}];
+         {"sets": ["ddi"], "label": "DDI drugDrugInteraction (DrugBank)   237,847", "size": 100},
+         {"sets": ["crd"], "label": "CRD drugDrugInteraction (metabolized by CYP enzyme)   235,559", "size": 100},
+         {"sets": ["pubMed"], "label": "PubMedDDI drugDrugInteraction   203", "size": 100},
+         {"sets": ["ddi", "crd"], "label": "109502", "size": 25},
+         {"sets": ["ddi", "pubMed"], "label": "22", "size": 25},
+         {"sets": ["crd", "pubMed"], "label": "23", "size": 25},
+         {"sets": ["ddi", "crd", "pubMed"], "label": "32", "size": 15}];

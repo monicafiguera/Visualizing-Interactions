@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import YASQE from "yasgui-yasqe";
 
 import {
 	Card,
@@ -10,13 +9,39 @@ import {
 
 import DatasetListContainer from "../Main/DatasetListContainer";
 
-//import queryUtils from "./queryUtils";
 import load from './load';
 
-var sampleQuery = "SELECT  distinct COUNT(?d1)" +
-"WHERE { ?d1 <http://project-iasis.eu/vocab/drugDrugInteraction_pubMed> ?d2. }";
+var crdQuery = `SELECT  distinct (COUNT(?d1) as ?crd)
+        WHERE {
+            ?d1 <http://project-iasis.eu/vocab/drugDrugInteraction_sameCYP> ?d2.
+        }
+    `;
 
-var endpoint = "http://localhost:11686/sparql";
+var intersCRDPUB = `SELECT distinct (COUNT(?d1) as ?crd_pubMed)
+    {
+    {
+    SELECT distinct ?d1 ?d2
+    WHERE {
+    ?interaction a <http://project-iasis.eu/vocab/EffectInteraction>.
+    ?interaction <http://project-iasis.eu/vocab/provenance> <http://project-iasis.eu/SourceName/PubMed>.
+    ?interaction <http://project-iasis.eu/vocab/isAffected> ?d1.
+    ?interaction <http://project-iasis.eu/vocab/affects> ?d2.
+    ?d1 <http://project-iasis.eu/vocab/drugDrugInteraction_sameCYP> ?d2
+    }
+    }
+    UNION
+    {
+    SELECT distinct ?d1 ?d2
+    WHERE {
+    ?interaction a <http://project-iasis.eu/vocab/EffectInteraction>.
+    ?interaction <http://project-iasis.eu/vocab/provenance> <http://project-iasis.eu/SourceName/PubMed>.
+    ?interaction <http://project-iasis.eu/vocab/isAffected> ?d1.
+    ?interaction <http://project-iasis.eu/vocab/affects> ?d2.
+    ?d2 <http://project-iasis.eu/vocab/drugDrugInteraction_sameCYP> ?d1
+    }
+    }
+    }
+    `;
 
 export default class Query extends Component {
 	constructor(props) {
@@ -28,23 +53,8 @@ export default class Query extends Component {
 
 	componentDidMount() {
 	    this.props.changeActiveSidebarTab(1);
-
 		this.loadQueryBox();
-
 		load.load();
-
-		/*const yasqe = YASQE(document.getElementById("yasqe"), {
-        	viewportMargin: Infinity,
-			backdrop: 99,
-			tabSize: 2,
-        	indentUnit: 2})
-
-
-
-		yasqe.setValue(sampleQuery);
-		yasqe.on('change', () => {
-			yasqe.getValue();
-		});*/
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
@@ -57,7 +67,6 @@ export default class Query extends Component {
 
 	loadQueryBox() {
 		console.log("loading box...");
-		//queryUtils.initializeYASQE();
 		this.setState({firstTimeLoaded: true});
 	}
 
@@ -71,21 +80,21 @@ export default class Query extends Component {
 					</Col>
 				</Row>
 
-				<Row>
+				{/*<Row>
 					<Col lg="6">
 						<DatasetListContainer />
 					</Col>
-				</Row>
+				</Row>*/}
 
 				<Row id="queryrow" style={{display: "flex"}}>
 
 					<Col lg="8">
 						<div id="yasqe"></div>
 						<div id="yasr"></div>
-						<div className="form-group">
+						{/*<div className="form-group">
 							<label className="control-label " htmlFor="timeout">Timeout</label>
 							<input className="form-control" id="timeout" name="timeout" type="text"/>
-						</div>
+						</div>*/}
 					</Col>
 					<Col lg="4">
 						<Card>
@@ -94,15 +103,11 @@ export default class Query extends Component {
 							</CardHeader>
 							<CardBody className="panel-body">
 								<ul>
-									<li id="people">
-										Get all Mutations of the type Confirmed somatic
-										variant located in transcripts which are translated as proteins
-										that are transporters of the drug Docetaxel!
+									<li id="sampleCRD">
+										Get CRD
 									</li>
-									<li id="lungcancer">
-										Info about lung cancer patients whose liquid
-										biopsy has been studied for somatic mutations that involve EGFR gene
-										amplification (over-expression)
+									<li id="sampleInteractions">
+										Get interactions between CRD and PubMedDDI
 									</li>
 								</ul>
 							</CardBody>
@@ -111,10 +116,10 @@ export default class Query extends Component {
 				</Row>
 
 
-				<Row id="resultrow">
+				{/*<Row id="resultrow">
 					<Col lg="12">
 						<Card className="panel panel-default">
-							{/*<p><b><span id="resstatus" style="color:red"></span></b></p>*/}
+							<p><b><span id="resstatus" style="color:red"></span></b></p>
 							<CardHeader className="panel-heading" id="resultinfo">
 								Results
 								<div className="pull-right">
@@ -139,7 +144,7 @@ export default class Query extends Component {
 
 						</Card>
 					</Col>
-				</Row>
+				</Row>*/}
      	    </div>
         );
     }

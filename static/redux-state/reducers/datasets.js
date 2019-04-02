@@ -1,36 +1,22 @@
 import {
-    ADD_FED,
-    DELETE_FED,
-    EDIT_FED
+    ADD_DATA_INFO
 } from "../actions/datasets";
 
 const INITIAL_STATE = {
-    ["crd"] : {name: "DDI + CRD + PubMedDDI"},
-    ["ncrd"] : {name: "DDI + NCRD + PubMedDDI"}
+    ["crd"] : {name: "DDI + CRD + PubMedDDI", loaded: false},
+    ["ncrd"] : {name: "DDI + NCRD + PubMedDDI", loaded: false}
 };
 
 const datasets = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case ADD_FED:
+        case ADD_DATA_INFO:
             return {
                 ...state,
-                [action.uri]: {
-                    ...state[action.uri],
+                [action.id]: {
+                    ...state[action.id],
                     ...action.info
                 }
             };
-
-        case DELETE_FED:
-            return state.filter(elem =>
-                elem.name !== action.name
-            );
-
-        case EDIT_FED:
-            return state.map(elem =>
-                elem.name === action.name
-                    ? Object.assign({}, elem, { name: action.newName, desc: action.desc })
-                    : elem
-            );
 
         default:
             return state;
