@@ -1,3 +1,12 @@
+var realData1 = [
+       {"sets": ["DDI"], "size": 347403},
+       {"sets": ["CRD"], "size": 345116},
+       {"sets": ["PubMedDI"], "size": 280},
+       {"sets": ["DDI", "CRD"], "size": 109534},
+       {"sets": ["DDI", "PubMedDI"], "size": 54},
+       {"sets": ["CRD", "PubMedDI"], "size": 55},
+       {"sets": ["DDI", "CRD", "PubMedDI"], "size": 32}];
+
 var realData2 = [
        {"sets": ["DDI"], "size": 347403},
        {"sets": ["NCRD"], "size": 5513},
@@ -55,8 +64,15 @@ function checkArraysEquality(arr1, arr2) {
     return equal;
 }
 
-function repaint(realData) {
-    console.log(realData);
+function repaint(number) {
+    var realData = realData1;
+    if (number === 1) {
+        realData = realData1;
+    } else {
+        realData = realData2;
+    }
+
+    //console.log(realData);
     var div = d3.select("#venn");
 
     // Adding tooltips on hover

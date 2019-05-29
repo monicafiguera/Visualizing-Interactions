@@ -27,39 +27,44 @@ export default class Main extends React.Component {
             var pubMed = wcrd.get_pubMed();
             var ddi_pubMed = wcrd.get_ddi_pubMed();
 
-            this.props.fetchCount(ddi);
-            this.props.fetchCount(pubMed);
-            this.props.fetchCount(ddi_pubMed);
+            var paintingNr = 1;
+
+            //this.props.fetchCount(ddi);
+            //this.props.fetchCount(pubMed);
+            //this.props.fetchCount(ddi_pubMed);
 
             if (currentDataset === "crd") {
                 var crd = wcrd.get_crd();
                 var ddi_crd = wcrd.get_ddi_crd();
                 var crd_pubMed = wcrd.get_crd_pubMed();
                 var ddi_crd_pubMed = wcrd.get_ddi_crd_pubMed();
-
-                this.props.fetchCount(crd);
-                this.props.fetchCount(ddi_crd);
-                this.props.fetchCount(crd_pubMed);
-                this.props.fetchCount(ddi_crd_pubMed);
+                paintingNr = 1;
+                //this.props.fetchCount(crd);
+                //this.props.fetchCount(ddi_crd);
+                //this.props.fetchCount(crd_pubMed);
+                //this.props.fetchCount(ddi_crd_pubMed);
             } else {
                 var ncrd = wncrd.get_ncrd();
                 var ddi_ncrd = wncrd.get_ddi_ncrd();
                 var ncrd_pubMed = wncrd.get_ncrd_pubMed();
                 var ddi_ncrd_pubMed = wncrd.get_ddi_ncrd_pubMed();
-
-                this.props.fetchCount(ncrd);
-                this.props.fetchCount(ddi_ncrd);
-                this.props.fetchCount(ncrd_pubMed);
-                this.props.fetchCount(ddi_ncrd_pubMed);
+                paintingNr = 2;
+                //this.props.fetchCount(ncrd);
+                //this.props.fetchCount(ddi_ncrd);
+                //this.props.fetchCount(ncrd_pubMed);
+                //this.props.fetchCount(ddi_ncrd_pubMed);
             }
-        }
 
-        if (this.props.data !== prevProps.data) {
-            console.log("current",this.props.datasets[currentDataset]);
+            //console.log("current",this.props.datasets[currentDataset]);
 
             diagram.buildDiagram(currentDataset);
-            diagram.repaint(this.props.data);
+
+
+            diagram.repaint(paintingNr);
+
         }
+
+
     }
 
     componentWillUnmount() {
