@@ -45,29 +45,44 @@ def main():
                        "drug-target"]
                        
     # statistical shapes
+    newData = []
 
     for i in range(8):
-        print("****************" + str(i) + "*******************")
+        print("**************** " + dataFramesNames[i] + " *******************")
         df = dataFrames[i]
-        percentileValue = np.percentile(df["Prob"], 95)
+        percentileValue = np.percentile(df["Prob"], 98)
         percentileValue = truncate(percentileValue, 4)
 
         print('Mean', df["Prob"].mean())
         print('Variance:', np.var(df["Prob"]))
         print('Standard Deviation', df["Prob"].std())
-        print("95th percentile:", percentileValue)
+        print("98th percentile:", percentileValue)
         
-        percCount = sum(j == percentileValue for j in df["Prob"])
+        percCount = sum(j >= percentileValue for j in df["Prob"])
         print("Percentile count:", percCount)
 
+
+        booleans = []
+        for prob in df["Prob"]:
+            if prob >= percentileValue:
+                booleans.append(True)
+            else:
+                booleans.append(False)
+
+        filtered = pd.Series(booleans)
+        filteredData = df[filtered] 
+        newData.append(filteredData)
+
         # Probability that the prediction is a real interaction
-        hist = df["Prob"].hist(bins=10, histtype='bar', stacked=True)
+        hist = filteredData["Prob"].hist(bins=10, histtype='bar', stacked=True)
         hist.set_xlabel("Probability")
         hist.set_ylabel("Frequency")
-        plt.legend(dataFramesNames)
-        plt.yscale("log")
 
-    plt.title("Drug interactions using BML")
+        plt.legend(dataFramesNames)
+        plt.yscale("linear")
+
+
+    plt.title("Drug interactions using BLM")
     plt.show()
 
 
