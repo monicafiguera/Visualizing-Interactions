@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+import csv
 
 def truncate(number, digits) -> float:
     stepper = 10.0 ** digits
@@ -12,6 +13,20 @@ def truncate(number, digits) -> float:
 def read_csv(filename):
     df = pd.read_csv(filename)
     return df
+
+def saveFilteredData(filteredData, interactionType):
+    path = "./filtered/"
+
+    try:
+        os.mkdir(path)
+    except OSError:
+        print ("Creation of the directory %s failed" % path)
+    else:
+        print ("Successfully created the directory %s " % path)
+
+
+    fileName = path + interactionType + "-filtered.csv"
+    filteredData.to_csv(fileName, encoding='utf-8', index=False)
 
 def main():
     DDI = "DDI_BLM_predictions.csv"
@@ -45,7 +60,6 @@ def main():
                        "drug-target"]
                        
     # statistical shapes
-    newData = []
 
     for i in range(8):
         print("**************** " + dataFramesNames[i] + " *******************")
@@ -71,7 +85,8 @@ def main():
 
         filtered = pd.Series(booleans)
         filteredData = df[filtered] 
-        newData.append(filteredData)
+        
+        saveFilteredData(filteredData, dataFramesNames[i])
 
         # Probability that the prediction is a real interaction
         hist = filteredData["Prob"].hist(bins=10, histtype='bar', stacked=True)
