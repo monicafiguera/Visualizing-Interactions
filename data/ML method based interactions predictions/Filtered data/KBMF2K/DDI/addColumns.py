@@ -44,7 +44,6 @@ def main():
     data.append({ "CRD": "CRD-filtered.csv" })
     data.append({ "DrugBank": "DrugBank-filtered.csv" })
     data.append({ "NCRD": "NCRD-filtered.csv" })
-    data.append({ "UMLS": "UMLS-filtered.csv" })
     
     for elem in data:
         for key,value in elem.items():

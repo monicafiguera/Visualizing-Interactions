@@ -20,4 +20,4 @@ combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames ])
 combined_csv = combined_csv.sort_values(by=['Prob'], ascending=False)
 
 #export to csv
-combined_csv.to_csv( "DDI_combined.csv",  encoding='utf-8', index=False)
+combined_csv.to_csv( "BLM_DDI_combined.csv",  encoding='utf-8', index=False)
