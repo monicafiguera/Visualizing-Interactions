@@ -1,8 +1,8 @@
 var data2 = [
-         {"sets": ["DDI"], "label": "DDI drugDrugInteraction (DrugBank)   346,725", "size": 150},
-         {"sets": ["NCRD"], "label": "NCRD drugDrugInteraction (Not metabolized by any CYP enzyme)   4,884", "size": 100},
-         {"sets": ["PubMedDI"], "label": "PubMedDDI drugDrugInteraction   222", "size": 70},
-         {"sets": ["DDI", "NCRD"], "label": "624", "size": 50},
+         {"sets": ["DDI"], "label": "DDI drugDrugInteraction (DrugBank)   347,040", "size": 150},
+         {"sets": ["NCRD"], "label": "NCRD drugDrugInteraction (Not metabolized by any CYP enzyme)   4,882", "size": 100},
+         {"sets": ["PubMedDI"], "label": "PubMedDDI drugDrugInteraction   192", "size": 70},
+         {"sets": ["DDI", "NCRD"], "label": "626", "size": 50},
          {"sets": ["DDI", "PubMedDI"], "label": "53", "size": 50},
          {"sets": ["NCRD", "PubMedDI"], "label": "4", "size": 50},
          {"sets": ["DDI", "NCRD", "PubMedDI"], "label": "1", "size": 25}];
