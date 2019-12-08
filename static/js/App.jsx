@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import MainContainer        from "./Main/MainContainer";
-import QueryContainer       from "./Query/QueryContainer";
+import PredictedContainer   from "./Predicted/PredictedContainer";
 import SidebarContainer     from "./SidebarContainer";
 import HeaderMenu           from "./HeaderMenu";
 
@@ -19,7 +19,7 @@ const App = ({store}) => (
 
                         <Switch>
                             <Route path="/" exact      component={MainContainer} />
-                            <Route path="/query"       component={QueryContainer} />
+                            <Route path="/predicted"   component={PredictedContainer} />
                         </Switch>
                     </div>
                 </Router>

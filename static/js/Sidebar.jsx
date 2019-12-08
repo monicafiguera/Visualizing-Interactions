@@ -11,8 +11,8 @@ import {
     faSitemap } from "@fortawesome/free-solid-svg-icons";
 
 const data = [
-    { id: 0, name: "Interactions",     icon: faSitemap, link: "/" },
-    { id: 1, name: "Query",            icon: faSearch,   link: "/query" }
+    { id: 0, name: "Known drug-drug interactions",     icon: faSitemap, link: "/" },
+    { id: 1, name: "Predicted drug-drug interactions", icon: faSearch,   link: "/predicted" }
 ];
 
 const Sidebar = ({activeSidebarTab}) => {
