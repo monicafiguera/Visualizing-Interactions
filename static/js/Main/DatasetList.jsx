@@ -23,8 +23,12 @@ export default class DatasetList extends React.Component {
     }
 
     render() {
-        const { datasets } = this.props;
         const { currentSelectedDataset } = this.state;
+
+        const datasets =     {
+            ["crd"] : {name: "DDI + CRD + PubMedDDI", loaded: false},
+            ["ncrd"] : {name: "DDI + NCRD + PubMedDDI", loaded: false}
+        };
 
         return (
             <div className="form-group form-control-lg">

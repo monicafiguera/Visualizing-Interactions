@@ -1,8 +1,8 @@
 var data3 = [
        {"sets": ["Literature"], "label": "Literature Based Predictions 10,236", "size": 100},
-       {"sets": ["semEP"], "label": "semEP 2868", "size": 100},
-       {"sets": ["BLM"], "label": "BLM 81521", "size": 100},
+       {"sets": ["semEP"], "label": "semEP 2,868", "size": 100},
+       {"sets": ["BLM"], "label": "BLM 81,521", "size": 100},
        {"sets": ["Literature", "semEP"], "label": "243", "size": 25},
-       {"sets": ["Literature", "BLM"], "label": "6052", "size": 25},
+       {"sets": ["Literature", "BLM"], "label": "6,052", "size": 25},
        {"sets": ["semEP", "BLM"], "label": "124", "size": 25},
        {"sets": ["Literature", "semEP", "BLM"], "label": "18", "size": 15}];

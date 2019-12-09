@@ -11,7 +11,7 @@ const App = ({store}) => (
     <Provider store={store}>
         <div className="App">
             <header className="App-header">
-                <HeaderMenu />
+                {/*<HeaderMenu />*/}
 
                 <Router>
                     <div id="main-container">

@@ -32,6 +32,10 @@ export default class Main extends React.Component {
                 paintingNr = 1;
             } else if (currentDataset === "laprls") {
                 paintingNr = 2;
+            } else if (currentDataset === "gip") {
+                paintingNr = 3;
+            } else {
+                paintingNr = 4;
             }
 
             //console.log("current",this.props.datasets[currentDataset]);

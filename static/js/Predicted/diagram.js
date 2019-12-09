@@ -16,6 +16,24 @@ var realDataLapRLS = [
        {"sets": ["semEP", "LapRLS"], "size": 110},
        {"sets": ["Literature", "semEP", "LapRLS"], "size": 9}];
 
+var realDataGIP = [
+       {"sets": ["Literature"], "size": 10915},
+       {"sets": ["semEP"], "size": 3136},
+       {"sets": ["GIP"], "size": 7045},
+       {"sets": ["Literature", "semEP"], "size": 246},
+       {"sets": ["Literature", "GIP"], "size": 436},
+       {"sets": ["semEP", "GIP"], "size": 25},
+       {"sets": ["Literature", "semEP", "GIP"], "size": 3}];
+
+var realDataKBMF2K = [
+       {"sets": ["Literature"], "size": 10501},
+       {"sets": ["semEP"], "size": 3211},
+       {"sets": ["KBMF2K"], "size": 286},
+       {"sets": ["Literature", "semEP"], "size": 243},
+       {"sets": ["Literature", "KBMF2K"], "size": 22},
+       {"sets": ["semEP", "KBMF2K"], "size": 1},
+       {"sets": ["Literature", "semEP", "KBMF2K"], "size": 0}];
+
 function buildDiagram(option) {
     var sets = {};
 
@@ -23,6 +41,10 @@ function buildDiagram(option) {
         sets = data3;
     } else if (option === "laprls") {
         sets = data4;
+    } else if (option === "gip") {
+        sets = data5;
+    } else {
+        sets = data6;
     }
 
     var chart = venn.VennDiagram()
@@ -65,12 +87,15 @@ function checkArraysEquality(arr1, arr2) {
 }
 
 function repaint(number) {
-    console.log("painting")
     var realData = realDataBLM;
     if (number === 1) {
         realData = realDataBLM;
-    } else {
+    } else if (number === 2) {
         realData = realDataLapRLS;
+    } else if (number === 3) {
+        realData = realDataGIP;
+    } else {
+        realData = realDataKBMF2K;
     }
 
     //console.log(realData);
