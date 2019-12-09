@@ -30,7 +30,7 @@ export default class Main extends React.Component {
 
             if (currentDataset === "blm") {
                 paintingNr = 1;
-            } else {
+            } else if (currentDataset === "laprls") {
                 paintingNr = 2;
             }
 

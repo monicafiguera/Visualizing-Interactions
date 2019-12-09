@@ -8,12 +8,12 @@ var realDataBLM = [
        {"sets": ["Literature", "semEP", "BLM"], "size": 18}];
 
 var realDataLapRLS = [
-       {"sets": ["Literature"], "size": 10236},
-       {"sets": ["semEP"], "size": 2868},
-       {"sets": ["LapRLS"], "size": 60768},
+       {"sets": ["Literature"], "size": 14353},
+       {"sets": ["semEP"], "size": 3221},
+       {"sets": ["LapRLS"], "size": 64743},
        {"sets": ["Literature", "semEP"], "size": 243},
-       {"sets": ["Literature", "LapRLS"], "size": 3865},
-       {"sets": ["semEP", "LapRLS"], "size": 101},
+       {"sets": ["Literature", "LapRLS"], "size": 3874},
+       {"sets": ["semEP", "LapRLS"], "size": 110},
        {"sets": ["Literature", "semEP", "LapRLS"], "size": 9}];
 
 function buildDiagram(option) {
@@ -21,8 +21,8 @@ function buildDiagram(option) {
 
     if (option === "blm") {
         sets = data3;
-    } else {
-        sets = data2;
+    } else if (option === "laprls") {
+        sets = data4;
     }
 
     var chart = venn.VennDiagram()
