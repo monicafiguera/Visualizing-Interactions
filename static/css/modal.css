@@ -1,0 +1,135 @@
+/* Modal dialog */
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 99999;
+  transition: opacity 1s ease-in;
+  pointer-events: auto;
+  overflow-y: auto;
+  display: block;
+}
+
+.modal .modal-dialog {
+  width: 500px;
+  position: relative;
+  margin: 6% auto;
+  padding: 5px 0px 13px 0px;
+  background: #fff;
+}
+
+.modal-header {
+  padding: 0.5rem 1rem;
+}
+
+.modal-header p {
+  margin: auto;
+  font-weight: bold;
+}
+
+.modal-header .fa-times {
+  height: 28px;
+}
+
+.modal-dialog {
+  position: relative;
+  padding: 15px;
+  pointer-events: auto;
+}
+
+.modal-dialog i#close-modal-fa-icon {
+  color: gray;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  font-size: 18px;
+}
+
+.modal-dialog p {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.modal-dialog div.modal-body {
+  text-align: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.modal-dialog div.modal-body label {
+  font-size: 14px;
+  color: black;
+  display: block;
+  float: left;
+  clear: both;
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
+  font-weight: bold;
+}
+
+.modal-dialog div.modal-body input, .modal-dialog div.modal-body select {
+  display: block;
+  clear: both;
+  width: 100%;
+}
+
+.modal-dialog div.modal-bottom {
+  height: 36px;
+  padding: 0 1.5rem;
+  margin-top: 10px;
+}
+
+.modal-dialog button {
+  float: right;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+
+/**/
+
+button {
+  background: #34495e;
+  border: 0;
+  color: #fff;
+  min-width: 40px;
+  border-radius: 4px;
+  padding: 0;
+  line-height: 32px;
+}
+
+div.setting-elem-container {
+  display: flex;
+  flex-direction: row;  
+}
+
+div.setting-label {
+  flex: 1 1 auto;
+  line-height: 20px;
+}
+
+div.setting-value {
+  flex: 1 1 auto;
+  line-height: 20px;
+}
+
+.setting-value input.input-value {
+  border: 0;
+  border-bottom-color: currentcolor;
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 5px 0;
+  font-size: 1em;
+  font-weight: 300;
+  background-color: transparent;
+  color: black;
+  font-size: 12px; 
+}

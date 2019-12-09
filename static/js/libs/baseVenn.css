@@ -1,0 +1,21 @@
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    justify-content: center;
+}
+#venn {
+    text-align: center;
+}
+
+.venntooltip {
+    position: absolute;
+    text-align: center;
+    width: 128px;
+    height: 24px;
+    background: #333;
+    color: #ddd;
+    padding: 2px;
+    border: 0px;
+    border-radius: 6px;
+    opacity: 0;
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Ontario-Dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.5.0",
+    "@fortawesome/fontawesome-free-regular": "^5.0.13",
+    "@fortawesome/fontawesome-svg-core": "^1.2.8",
+    "@fortawesome/free-regular-svg-icons": "^5.5.0",
+    "@fortawesome/free-solid-svg-icons": "^5.5.0",
+    "@fortawesome/react-fontawesome": "^0.1.3",
+    "bootstrap": "^4.1.3",
+    "classnames": "^2.2.6",
+    "cross-fetch": "^3.0.1",
+    "d3": "^5.8.2",
+    "jquery": "^3.3.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-bootstrap-table": "^4.3.1",
+    "react-dom": "^16.6.3",
+    "react-redux": "^6.0.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "reactstrap": "^6.5.0",
+    "recompose": "^0.30.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "yasgui-yasqe": "^2.11.22"
+  },
+  "scripts": {
+    "build": "webpack -p --progress --config webpack.config.js",
+    "dev-build": "webpack --progress -d --config webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --progress -d --config webpack.config.js --watch"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.2.3"
+  }
+}

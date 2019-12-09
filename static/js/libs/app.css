@@ -1,0 +1,556 @@
+@import url('bootstrap.min.css');
+@import url('modal.css');
+@import url('react-bootstrap-table.min.css');
+@import url('yasqe.min.css');
+@import url('yasr.min.css');
+@import url('baseVenn.css');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+p {
+  margin-bottom: 0rem;
+}
+
+div#header-navbar * {
+  /*color: #e7e7e7;*/
+}
+
+div#header-navbar *:hover {
+  color: #fff;
+}
+
+div#header-navbar nav button.dropdown-item {
+  color: black;
+  font-style: 14px!important;
+}
+
+div#header-navbar nav {
+  background-color: #343a40 !important;
+  padding: 0rem 0.8rem 0em 0.8rem;
+}
+
+div#header-navbar nav.navbar .nav-item svg {
+  font-size: 16px;
+}
+
+div#header-navbar a.dropdown-toggle.nav-link::after {
+  font-size: 14px;
+  vertical-align: 0.18em!important;
+}
+
+div#sidebar-nav {
+  display: inline-block;
+  float: left;
+  min-width: 250px;
+  background: #f8f9fa;
+  border-right: 1px solid #d3d3d3;
+  height: 94vh;
+}
+
+.line-bottom {
+  padding-bottom: 9pc;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+div#sidebar-nav * {
+  color: #337ab7;
+}
+
+div#sidebar-nav nav.navbar {
+  padding-left: 0px;
+  padding-right: 0px;
+  color: #337ab7;
+  text-align: left;
+  font-size: 15px;
+}
+
+div#sidebar-nav svg {
+  margin-right: 5px;
+}
+
+
+div#sidebar-nav svg.fa-angle-left {
+  margin-right: 2px;
+  margin-left: 7px;
+}
+
+/*#sidebar-nav .nav-item {
+  padding: 0.5rem 0.2rem;
+}*/
+
+/* Bootstrap sets some styling for this class */
+div#sidebar-nav ul.navbar-nav {
+  margin-top: 8px;
+}
+
+.sidebar-divider {
+  height: 0;
+  margin: .2rem 0;
+  overflow: hidden;
+  border-top: 1px solid #e9ecef;
+
+}
+
+#main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#body-container {
+  flex: 8 1 auto;
+  padding: 20px;
+  color: black;
+}
+
+#body-container h3.title {
+  text-align: left;
+}
+
+#body-container div.panels-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#body-container div.panel {
+  flex: 1 1 auto;
+  /*margin-left: 6px;
+  margin-right: 6px;*/
+  margin-bottom: 20px;
+  background-color: #fff;
+  /*border: 1px solid transparent;*/
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  flex: 1 0 98%;
+  padding-top: 0;
+  font-size: 14px;
+}
+
+#body-container #summaryrow .panel-container {
+  padding: 6px;
+}
+
+div#page-wrapper {
+  margin-top: 20px;
+}
+
+div#summaryrow .panel .card-header .text-right {
+  color: white;
+}
+
+.dashboard-container div.panel.panel-blue {
+  border: 1px solid #337ab7;
+}
+
+.panel-heading {
+  padding: 10px 15px;
+}
+
+.panel-blue .card-header {
+  background-color: #337ab7;
+}
+
+.panel-red .card-header {
+  background-color: #d9534f;
+}
+
+.panel-green .card-header {
+  background-color: #3d8b3d;
+}
+
+.panel-yellow .card-header {
+  background-color: #f0ad4e;
+}
+
+.dashboard-container div.panel.panel-red {
+  border: 1px solid #d9534f;
+}
+
+.dashboard-container div.panel.panel-green {
+  border: 1px solid #5cb85c;
+}
+
+.dashboard-container div.panel.panel-yellow {
+  border: 1px solid #f0ad4e;
+}
+
+/*@media (min-width: 768px) {
+  .dashboard-container div.panels-container div.panel {
+    flex: 1 0 47%;
+  }
+  #body-container div.panel {
+    flex: 1 0 47%!important;
+  }
+}
+
+@media (min-width: 1224px) {
+  .dashboard-container div.panels-container div.panel {
+    flex: 1 0 21%;
+  }
+  #body-container div.panel {
+    flex: 1 0 21%!important;
+  }
+}*/
+
+@media screen and (min-width: 768px) {
+  .sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+
+}
+
+body {
+  color: black!important;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.huge {
+  font-size: 40px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+
+
+
+
+.panel-green {
+  border-color: #5cb85c;
+}
+.panel-green > .panel-heading {
+  border-color: #5cb85c;
+  color: white;
+  background-color: #5cb85c;
+}
+.panel-green > a {
+  color: #5cb85c;
+}
+.panel-green > a:hover {
+  color: #3d8b3d;
+}
+.panel-red {
+  border-color: #d9534f;
+}
+.panel-red > .panel-heading {
+  border-color: #d9534f;
+  color: white;
+  background-color: #d9534f;
+}
+.panel-red > a {
+  color: #d9534f;
+}
+.panel-red > a:hover {
+  color: #b52b27;
+}
+.panel-yellow {
+  border-color: #f0ad4e;
+}
+.panel-yellow > .panel-heading {
+  border-color: #f0ad4e;
+  color: white;
+  background-color: #f0ad4e;
+}
+.panel-yellow > a {
+  color: #f0ad4e;
+}
+.panel-yellow > a:hover {
+  color: #df8a13;
+}
+
+div#body-container .dropdown-menu.dropdown-menu-right.show {
+  background-color: transparent!important;
+  border: none!important;
+}
+
+.dropdown-menu.dropdown-menu-right.show .dropdown-item:hover {
+  cursor: pointer;
+  background-color: #f1f1f1;
+}
+
+li.nav-item:hover {
+  cursor: pointer;
+  /*background-color: #e4e4e4;*/
+}
+
+#sidebar-nav * {
+  font-size: 14px;
+}
+
+#sidebar-nav .card {
+  background-color: transparent!important;
+  border: none;
+}
+
+.card-body {
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+.card-item {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.card-item:hover {
+  cursor: pointer;
+}
+
+.contents-container {
+  font-size: 14px;
+}
+
+.tab-pane {
+  text-align: left;
+}
+
+.form-control-lg {
+  padding: 0;
+}
+
+.body-content-header {
+  margin-bottom: 15px;
+}
+
+svg {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.card-body .form-group button {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+/*.tab-pane .card-body {
+  margin-top: 10px;
+}*/
+
+.card-header {
+  padding: 0.75rem 1rem;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: bold;
+  float: left;
+}
+
+#federationlistrow {
+  margin-bottom: 15px;
+}
+
+.card-header + .card-body {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+div.pull-right button.dropdown-toggle {
+  font-size: 10px;
+  padding: 0.2rem 0.4rem;
+  border: 0.5px solid #c4c4c4;
+}
+
+div#header-navbar .dropdown-menu button svg path {
+  color: black;
+}
+
+#sidebar-nav li.nav-item.active {
+    background-color: #eeeeee;
+}
+
+.search-bar {
+  margin-left: 8px;
+  margin-right: 8px;
+  width: auto!important;
+}
+
+li.nav-item a {
+  padding: 0.5rem 0.2rem;
+  display: block;
+  width: 100%;
+  height: auto!important;
+  text-decoration: none;
+}
+
+ul.navbar-nav li.nav-item a svg {
+  width: 22px;
+}
+
+ul.nav-tabs li.nav-item a {
+  padding-left: 9px;
+  padding-right: 9px;
+  letter-spacing: 0.5px;
+}
+
+ul.nav-tabs li.nav-item a.active {
+  color: black;
+}
+
+
+ul.nav-tabs li.nav-item a:not(.active) {
+  color: #7A7A7A;
+}
+
+table#datasources tbody tr.active {
+  background-color: #acbad4;
+}
+
+.breadcrumb-sep {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.selectedBCelem {
+  font-weight: bold;
+}
+
+.hiddenBCelem {
+  display: none;
+}
+
+.BCelem:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* default css for react-bootstrap-table overwritten */
+.react-bs-table table td, .react-bs-table table th {
+  white-space: normal;
+}
+
+.react-bs-table-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Query component */
+#resultrow {
+  margin-top: 22px;
+}
+
+.fed-actions-container {
+  display: flex;
+}
+
+.fed-actions-container div {
+  flex-direction: column;
+  line-height: 36px;
+  font-size: 18px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.fed-actions-container div:hover {
+  cursor: pointer;
+}
+
+.fed-actions-container div svg {
+  margin-right: 10px;
+}
+
+.fed-actions-container div.fed-opt-disabled * {
+  color: gray;
+  cursor: default;
+}
+
+.button-save {
+    height: calc(2.25rem + 2px);
+    line-height: 1.5;
+
+    text-align: right;
+    width: 6px;
+}
+
+.button-save svg {
+  margin: 0;
+}
+
+.button-save svg path {
+  color: white;
+}
+
+.input-endpoint-name {
+    flex: 1 1 auto;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-right: 8px;
+}
+
+.label-endpoint {
+  color: black!important;
+  margin-right: 8px;
+  padding-top: 8px;
+  font-size: 15px;
+}
+
+#header-navbar-endpoint {
+  display: flex;
+  flex-direction: row;
+
+  width: 35%;
+  float: right;
+}
+
+#header-navbar {
+  padding: 3px;
+  padding-right: 10px;
+  border-bottom: 1px solid #b8b8b8;
+  background: #f8f6f6;
+}
+
+h3 {
+  font-size: 20px;
+}
