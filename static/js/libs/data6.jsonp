@@ -1,6 +1,6 @@
 var data6 = [
-       {"sets": ["Literature"], "label": "Literature Based Predictions 10,236", "size": 100},
-       {"sets": ["semEP"], "label": "semEP 2,868", "size": 100},
+       {"sets": ["Literature"], "label": "Literature Based Predictions 10.236", "size": 100},
+       {"sets": ["semEP"], "label": "semEP 2.868", "size": 100},
        {"sets": ["KBMF2K"], "label": "KBMF2K 263", "size": 100},
        {"sets": ["Literature", "semEP"], "label": "243", "size": 25},
        {"sets": ["Literature", "KBMF2K"], "label": "22", "size": 25},

@@ -1,7 +1,7 @@
 var data5 = [
-       {"sets": ["Literature"], "label": "Literature Based Predictions 10,236", "size": 100},
-       {"sets": ["semEP"], "label": "semEP 2,868", "size": 100},
-       {"sets": ["GIP"], "label": "GIP 6,587", "size": 100},
+       {"sets": ["Literature"], "label": "Literature Based Predictions 10.236", "size": 100},
+       {"sets": ["semEP"], "label": "semEP 2.868", "size": 100},
+       {"sets": ["GIP"], "label": "GIP 6.587", "size": 100},
        {"sets": ["Literature", "semEP"], "label": "243", "size": 25},
        {"sets": ["Literature", "GIP"], "label": "433", "size": 25},
        {"sets": ["semEP", "GIP"], "label": "22", "size": 25},
